@@ -2,16 +2,39 @@ from PIL import Image
 import numpy as np
 from matplotlib import pyplot as plt
 
-grey_img = np.zeros((256, 256), np.uint8)
-img = np.array(Image.open('saltnpepper.png'))
+def GrayScale(img):
+    """
+    Converts an input color image to grayscale.
 
-grey_img = np.mean(img[:, :, :], 2)
+    Input:  numpy array of image
+    Output: numpy array of image conerted to Grayscale 
+    """
+    if np.ndim(img) > 2:
+        gray_img = np.zeros((np.shape(img)[0], np.shape(img)[1]), np.uint8)
+        gray_img = np.mean(img, 2)
+        return gray_img
+    else:
+        return img
 
-# print(grey_img.dtype, grey_img.shape, grey_img.ndim)
+def SaveImage(img, name = 'Default.jpg'):
+    """
+    Saves the input image to a file.
 
-plt.imshow(grey_img, cmap='gray', interpolation='nearest')
-plt.axis('off')
-plt.tight_layout()
-plt.show()
+    Input:  numpy array of image to be saved
+            string with the name and extension of the file (Default name: 'Default.jpg')
+    """
+    Image.fromarray(img).convert("L").save(name)
 
-Image.fromarray(grey_img).convert("L").save('saltnpepper_Grayscale.png')
+
+if __name__ == "__main__":
+
+    img = np.array(Image.open('saltnpepper.png'))
+    gray_img = GrayScale(img)
+
+    plt.imshow(gray_img, cmap='gray', interpolation='nearest')
+    plt.axis('on')
+    plt.xlabel('{} pixels'.format(np.shape(gray_img)[1]))
+    plt.ylabel('{} pixels'.format(np.shape(gray_img)[0]))
+    plt.title("Grayscale Image")
+    plt.show()
+
