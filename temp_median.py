@@ -3,14 +3,14 @@ import numpy as np
 from GrayScale import GrayScale
 from matplotlib import pyplot as plt
 
-img_1 = GrayScale(np.array(Image.open('1.jpg')))
-img_2 = GrayScale(np.array(Image.open('2.jpg')))
-img_3 = GrayScale(np.array(Image.open('3.jpg')))
-img_4 = GrayScale(np.array(Image.open('4.jpg')))
-img_5 = GrayScale(np.array(Image.open('5.jpg')))
-img_6 = GrayScale(np.array(Image.open('6.jpg')))
-img_7 = GrayScale(np.array(Image.open('7.jpg')))
-img_8 = GrayScale(np.array(Image.open('8.jpg')))
+img_1 = GrayScale(np.array(Image.open('Images/1.jpg')))
+img_2 = GrayScale(np.array(Image.open('Images/2.jpg')))
+img_3 = GrayScale(np.array(Image.open('Images/3.jpg')))
+img_4 = GrayScale(np.array(Image.open('Images/4.jpg')))
+img_5 = GrayScale(np.array(Image.open('Images/5.jpg')))
+img_6 = GrayScale(np.array(Image.open('Images/6.jpg')))
+img_7 = GrayScale(np.array(Image.open('Images/7.jpg')))
+img_8 = GrayScale(np.array(Image.open('Images/8.jpg')))
 
 
 a = np.zeros((np.shape(img_1)[0], np.shape(img_1)[1], 8))

@@ -18,7 +18,8 @@ def LogCompress(img, scale_1 = 100, scale_2 = 20):
 
 if __name__ == "__main__":
 
-    img = np.array(Image.open('SRA Khopdi Baba Grayscale.jpg'), np.float64)
+    img = np.array(Image.open(
+        'Images/SRA Khopdi Baba Grayscale.jpg'), np.float64)
     log_img = LogCompress(img)
 
     plt.imshow(log_img, cmap='gray', interpolation='nearest')

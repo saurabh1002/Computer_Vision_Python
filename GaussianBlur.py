@@ -36,7 +36,8 @@ def GaussianBlur(img, window_size = 3, sigma = 0.5):
 
 if __name__ == "__main__":
 
-    img = np.array(Image.open('SRA Khopdi Baba Grayscale.jpg'), np.float64)
+    img = np.array(Image.open(
+        'Images/SRA Khopdi Baba Grayscale.jpg'), np.float64)
     img_conv = GaussianBlur(img, 5, 2)
 
     plt.imshow(img_conv, cmap='gray', interpolation='nearest')

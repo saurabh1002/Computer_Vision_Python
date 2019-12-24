@@ -16,19 +16,20 @@ def GrayScale(img):
     else:
         return img
 
-def SaveImage(img, name = 'Default.jpg'):
+
+def SaveImage(img, name='Images/Default.jpg'):
     """
     Saves the input image to a file.
 
     Input:  numpy array of image to be saved
-            string with the name and extension of the file (Default name: 'Default.jpg')
+            string with the name and extension of the file (Default name: 'Images/Default.jpg')
     """
     Image.fromarray(img).convert("L").save(name)
 
 
 if __name__ == "__main__":
 
-    img = np.array(Image.open('saltnpepper.png'))
+    img = np.array(Image.open('Images/saltnpepper.png'))
     gray_img = GrayScale(img)
 
     plt.imshow(gray_img, cmap='gray', interpolation='nearest')
@@ -37,4 +38,3 @@ if __name__ == "__main__":
     plt.ylabel('{} pixels'.format(np.shape(gray_img)[0]))
     plt.title("Grayscale Image")
     plt.show()
-

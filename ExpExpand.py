@@ -20,7 +20,8 @@ def ExpExpand(img, scale_1 = 0.01, scale_2 = 20):
 
 if __name__ == "__main__":
 
-    img = np.array(Image.open('SRA Khopdi Baba Grayscale.jpg'), np.float64)
+    img = np.array(Image.open(
+        'Images/SRA Khopdi Baba Grayscale.jpg'), np.float64)
     exp_img = ExpExpand(img)
 
     plt.imshow(exp_img, cmap='gray', interpolation='nearest')

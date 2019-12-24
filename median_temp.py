@@ -3,7 +3,7 @@ import numpy as np
 from math import log2
 from matplotlib import pyplot as plt
 
-img = np.array(Image.open('SRA Khopdi Baba Grayscale.jpg'), np.uint8)
+img = np.array(Image.open('Images/SRA Khopdi Baba Grayscale.jpg'), np.uint8)
 
 window_size = 3
 
