@@ -1,6 +1,5 @@
 from PIL import Image
 import numpy as np
-from math import log2
 from GrayScale import GrayScale
 from matplotlib import pyplot as plt
 
@@ -26,10 +25,10 @@ def GaussianBlur(img, window_size = 3, sigma = 0.5):
 
     img_conv = GrayScale(img).copy()
 
-    for i in range((window_size // 2), np.shape(img)[0] - (window_size // 2)):
-        for j in range((window_size // 2), np.shape(img)[1] - (window_size // 2)):
+    for i in range(center, np.shape(img)[0] - center):
+        for j in range(center, np.shape(img)[1] - center):
             img_conv[i, j] = np.sum(
-                temp * img[i-(window_size // 2):i+(window_size // 2)+1, j-(window_size // 2):j+(window_size // 2)+1])
+                temp * img[i - center:i + center + 1, j - center:j + center + 1])
 
     return img_conv
 

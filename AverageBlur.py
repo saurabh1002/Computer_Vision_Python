@@ -1,6 +1,5 @@
 from PIL import Image
 import numpy as np
-from math import log2
 from GrayScale import GrayScale
 from matplotlib import pyplot as plt
 
@@ -14,11 +13,12 @@ def AverageBlur(img, window_size = 3):
     img = GrayScale(img)
     avg_img = img.copy()
     temp = np.ones((window_size, window_size)) / (window_size ** 2)
+    w = window_size // 2
 
-    for i in range((window_size // 2), np.shape(img)[0] - (window_size // 2)):
-        for j in range((window_size // 2), np.shape(img)[1] - (window_size // 2)):
+    for i in range(w, np.shape(img)[0] - w):
+        for j in range(w, np.shape(img)[1] - w):
             avg_img[i, j] = np.sum(
-                temp * img[i-(window_size // 2):i+(window_size // 2)+1, j-(window_size // 2):j+(window_size // 2)+1])
+                temp * img[i - w:i + w + 1, j - w:j + w + 1])
 
     return avg_img
 

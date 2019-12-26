@@ -1,6 +1,5 @@
 from PIL import Image
 import numpy as np
-from math import log2
 from GrayScale import GrayScale
 from matplotlib import pyplot as plt
 
