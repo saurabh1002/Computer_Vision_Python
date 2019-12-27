@@ -43,9 +43,8 @@ def SobelEdgeDetector(img, window_size = 5, dir_x = 1, dir_y = 1):
             direction of the Kernel along x-axis (default = 1; set -1 to invert)
             direction of the Kernel along y-axis (default = 1; set -1 to invert)
         Output: 
-            sob_x --> numpy array of Vertical edges
-            sob_y --> numpy array of Horizontal edges
-            sob --> numpy array of edge intensity magnitudes
+            sob_mag --> numpy array of edge intensity magnitudes
+            sob_dir --> numpy array of edge directions
     """
 
     kernel_x, kernel_y = SobelKernel(window_size)
@@ -63,28 +62,21 @@ def SobelEdgeDetector(img, window_size = 5, dir_x = 1, dir_y = 1):
             sob_y[i, j] = abs(np.sum(
                 dir_y * kernel_y * gray_img[i - w:i + w + 1, j - w:j + w + 1]))
 
-    sob = np.sqrt(sob_x ** 2 + sob_y ** 2)
+    sob_mag = np.sqrt(sob_x ** 2 + sob_y ** 2)
+    sob_mag = sob_mag * 255 / np.amax(sob_mag)
+    sob_dir = np.arctan2(sob_y, sob_x)
 
-    return sob_x, sob_y, sob
+    return sob_mag, sob_dir
 
 
 if __name__ == "__main__":
     img = np.array(Image.open(
         'Images/capture_1.png'), np.float64)
-    sob_x, sob_y, sob = SobelEdgeDetector(img)
+    sob_mag = SobelEdgeDetector(img)
 
     f = plt.figure()
     plt.title("Sobel Edge Detector")
-    f.add_subplot(1, 3, 1)
-    plt.title("Horizontal Edges")
+    f.add_subplot(1, 1, 1)
     plt.axis('off')
-    plt.imshow(sob_y, cmap='gray', interpolation='nearest')
-    f.add_subplot(1, 3, 2)
-    plt.title("Vertical Egdes")
-    plt.axis('off')
-    plt.imshow(sob_x, cmap='gray', interpolation='nearest')
-    f.add_subplot(1, 3, 3)
-    plt.title("All Edges combined")
-    plt.axis('off')
-    plt.imshow(sob, cmap='gray', interpolation='nearest')
+    plt.imshow(sob_mag, cmap='gray', interpolation='nearest')
     plt.show(block=True)

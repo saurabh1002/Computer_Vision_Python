@@ -8,9 +8,8 @@ def PrewittsOperator(img):
     """
     Performs edge detection using the Prewitts Operator. It is an extension to Improved First Order Difference method.
     Input:  numpy array of grayscale image
-    Output: prew_x --> numpy array of Vertical edges
-            prew_y --> numpy array of Horizontal edges
-            edge_mag --> numpy array of edge intensity magnitudes
+    Output: edge_mag --> numpy array of edge intensity magnitudes
+            edge_dir --> numpy array of edge directions
     """
     kernel_x = np.array([[1.0, 0.0, -1.0], [1.0, 0.0, -1.0], [1.0, 0.0, -1.0]])
     kernel_y = np.transpose(kernel_x)
@@ -24,23 +23,19 @@ def PrewittsOperator(img):
             prew_y[i, j] = abs(np.sum(kernel_y * gray_img[i - 1:i + 2, j - 1:j + 2]))
 
     edge_mag = np.sqrt(prew_x ** 2 + prew_y ** 2)
-    return prew_x, prew_y, edge_mag
+    edge_mag = edge_mag * 255 / np.amax(edge_mag)
+    edge_dir = np.arctan2(prew_y, prew_x)
+
+    return edge_mag, edge_dir
 
 
 if __name__ == "__main__":
     img = np.array(Image.open(
         'Images/capture_1.png'), np.float64)
-    prew_x, prew_y, prew_m = PrewittsOperator(img)
+    prew_m, prew_d = PrewittsOperator(img)
 
     f = plt.figure()
     plt.title("Prewitts edge detection operator")
-    f.add_subplot(1, 3, 1)
-    plt.title("Vertical Egdes")
-    plt.imshow(prew_x, cmap='gray', interpolation='nearest')
-    f.add_subplot(1, 3, 2)
-    plt.title("Horizontal Edges")
-    plt.imshow(prew_y, cmap='gray', interpolation='nearest')
-    f.add_subplot(1, 3, 3)
-    plt.title("Magnitude of edge vectors")
+    f.add_subplot(1, 1, 1)
     plt.imshow(prew_m, cmap='gray', interpolation='nearest')
     plt.show(block=True)

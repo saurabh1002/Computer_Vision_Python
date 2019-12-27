@@ -20,10 +20,10 @@ def GaussianBlur(img, window_size = 3, sigma = 0.5):
         for j in range (0, window_size):
             temp[i, j] = np.exp(-1 * (((i - center) ** 2) + ((j - center) ** 2)) / (sigma ** 2 * 2))
             sum += temp[i, j]
-
     temp = temp / sum
 
-    img_conv = GrayScale(img).copy()
+    img = GrayScale(img)
+    img_conv = img.copy()
 
     for i in range(center, np.shape(img)[0] - center):
         for j in range(center, np.shape(img)[1] - center):
